@@ -1,8 +1,12 @@
 package mc.alk.bungeearena.Communication;
 
+import com.google.common.io.*;
+import mc.alk.bungeearena.*;
 import net.md_5.bungee.api.config.*;
+import net.md_5.bungee.api.plugin.*;
 
 import java.io.*;
+import java.util.*;
 
 /**
  * Beta
@@ -10,17 +14,50 @@ import java.io.*;
  */
 public class Transmitter {
 /* Perform Transmitting */
+    private Plugin plugin = Main.getPlugin();
+    public Transmitter(String subChannel,ArrayList<String> message,Integer id,String server) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream(); //Converted
+        DataOutputStream data = new DataOutputStream(bytes); //Message will be
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
 
-    public Transmitter(String channel, String subChannel, ServerInfo server, String msg) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        DataOutputStream data = new DataOutputStream(bytes);
+        //Define Sub Channel
+        out.writeUTF(subChannel);
+
         try {
-            data.writeUTF(subChannel);
-            data.writeShort(msg.length());
-            data.writeUTF(msg);
-            server.sendData(channel, bytes.toByteArray());
-        } catch (IOException e) {
+            for (String s:message) {
+                data.writeUTF(s);
+            }
+            data.writeShort(id);
+        }catch (IOException e){}
+        out.writeShort(bytes.toByteArray().length);
+        out.write(bytes.toByteArray());
+
+        plugin.getProxy().getServerInfo(server).sendData("BattleArena",out.toByteArray());
+    }
+    public Transmitter(String subChannel, String command, String playerName, ArrayList<String> args, String server) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream(); //Converted
+        DataOutputStream data = new DataOutputStream(bytes); //Message will be
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        //Define Sub Channel
+        out.writeUTF(subChannel);
+        out.writeUTF(server);
+        try {
+                data.writeUTF(playerName);
+                data.writeUTF(command);
+                ByteArrayOutputStream bytes1 = new ByteArrayOutputStream(); //Converted
+                DataOutputStream subOut = new DataOutputStream(bytes1);
+                for (String s : args) {
+                    subOut.writeUTF(s);
+                }
+                data.writeInt(bytes1.toByteArray().length);
+                data.write(bytes1.toByteArray());
+            } catch (IOException e) {
+            out.writeShort(bytes.toByteArray().length);
+            out.write(bytes.toByteArray());
         }
+
+
+        plugin.getProxy().getServerInfo(server).sendData("BattleArena",out.toByteArray());
     }
 }
 

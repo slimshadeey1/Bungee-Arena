@@ -28,7 +28,7 @@ public class Receiver implements Listener {
     public static void PluginMessageEvent(Connection sender, Connection receiver, String tag, byte[] data) {
 
 
-        if (tag.equals("BungeeCord")) {
+        if (tag.equals("BattleArena")) {
 
                 /*Perform subchannel decryption as well as data parsing */
 
@@ -45,12 +45,11 @@ public class Receiver implements Listener {
                 switch (subchannel) {
 
 
-                    case "BattleArenaEventNames":
+                    case "EventNames":
                         len = in.readShort();
                         bytes = new byte[len];
-                        in.readFully(data);
-                        dataRaw = new String(data);
-                        RawDataConverter EventData = new RawDataConverter(dataRaw, true);
+                        in.readFully(bytes);
+                        NamesFormatter EventData = new NamesFormatter(bytes);
                         EventNames = EventData.getNames();
                         Server = EventData.getServerName();
                         for (String s : EventNames) {
@@ -59,12 +58,11 @@ public class Receiver implements Listener {
                         break;
 
 
-                    case "BattleArenaGameNames":
+                    case "GameNames":
                         len = in.readShort();
                         bytes = new byte[len];
-                        in.readFully(data);
-                        dataRaw = new String(data);
-                        RawDataConverter GameData = new RawDataConverter(dataRaw, true);
+                        in.readFully(bytes);
+                        NamesFormatter GameData = new NamesFormatter(bytes);
                         GameNames = GameData.getNames();
                         Server = GameData.getServerName();
                         for (String s : GameData.getNames()) {
@@ -76,9 +74,8 @@ public class Receiver implements Listener {
                     case "CommandResponse":            /* I would like the rest of the channels to be executed in this fashion. */
                         len = in.readShort();
                         bytes = new byte[len];
-                        in.readFully(data);
-                        dataRaw = new String(data);
-                        new CommandHandler(dataRaw);
+                        in.readFully(bytes);
+                        new CommandHandler(bytes);
                         break;
 
 
@@ -87,7 +84,7 @@ public class Receiver implements Listener {
                         bytes = new byte[len];
                         in.readFully(data);
                         dataRaw = new String(data);
-                        new CommandHandler(dataRaw); //Change
+                        new CommandHandler(bytes); //Change
                         break;
 
 
@@ -96,7 +93,7 @@ public class Receiver implements Listener {
                         bytes = new byte[len];
                         in.readFully(data);
                         dataRaw = new String(data);
-                        new CommandHandler(dataRaw); //Change
+                        new CommandHandler(bytes); //Change
                         break;
 
 
@@ -105,7 +102,7 @@ public class Receiver implements Listener {
                         bytes = new byte[len];
                         in.readFully(data);
                         dataRaw = new String(data);
-                        new CommandHandler(dataRaw); //Change
+                        new CommandHandler(bytes); //Change
                         break;
 
 

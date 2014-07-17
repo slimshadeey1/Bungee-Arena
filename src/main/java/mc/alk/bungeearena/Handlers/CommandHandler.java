@@ -8,9 +8,9 @@ import net.md_5.bungee.api.connection.*;
  * Created by Ben Byers on 7/16/2014.
  */
 public class CommandHandler {
-    public CommandHandler(String data) {
+    public CommandHandler(byte[] data) {
         //Initialize data into converter. Dump raw string in... get good stuff back :)
-        RawDataConverter newData = new RawDataConverter(data);
+        RawDataConverter newData = new RawDataConverter(data,true);
         //Get all of the necessary variables and define them here
         ProxiedPlayer player = newData.getPlayer();
         String response = newData.getResponseString();

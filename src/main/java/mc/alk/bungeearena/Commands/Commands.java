@@ -1,7 +1,7 @@
 package mc.alk.bungeearena.Commands;
 
-import mc.alk.bungeearena.Communication.*;
 import mc.alk.bungeearena.*;
+import mc.alk.bungeearena.Communication.*;
 import net.md_5.bungee.api.plugin.*;
 
 /**
@@ -19,7 +19,6 @@ public class Commands {
 
         for (String event : Receiver.getEventNames()) {
             server.registerCommand(plugin, new Commander(event, null));
-            Receiver.ChannelMap(event, );
         }
         for (String game : Receiver.getGameNames()) {
             server.registerCommand(plugin, new Commander(game, null));

@@ -1,9 +1,11 @@
 package mc.alk.bungeearena.Util;
 
+import com.google.common.io.*;
 import mc.alk.bungeearena.*;
 import net.md_5.bungee.api.config.*;
 import net.md_5.bungee.api.connection.*;
 
+import java.io.*;
 import java.util.*;
 
 /**
@@ -18,35 +20,38 @@ public class RawDataConverter {
     String serverName;
     String playerName;
     ArrayList<String> response;
-    ArrayList<String> Names;
+    Integer argsLength;
+    Integer resLength;
 
-    public RawDataConverter(String Commanddata) {
-        playerName = Commanddata.split(".")[1].split("=")[0];
-        serverName = Commanddata.split(".")[0];
-        String[] commandRaw = Commanddata.split(".")[1].split("=")[1].replace(";", "").split(" ");
-        player = Main.getPlugin().getProxy().getPlayer(playerName);
-        server = Main.getPlugin().getProxy().getServerInfo(serverName);
-        Integer argsLen = Integer.getInteger(commandRaw[0]);
-        command = commandRaw[1];
-        args = new ArrayList<>();
-        for (int i = 2; i == argsLen; i++) {
-            args.add(commandRaw[i]);
-        }
-        for (int i = argsLen + 1; i == commandRaw.length; i++) {
-            response.add(commandRaw[i]);
-        }
-    }
 
-    public RawDataConverter(String rawData, Boolean NameFind) { ///TODO Figure out how I want the other channel syntax to work
-        String[] originalNames = rawData.split(":")[1].replace(";", "").split(",");
-        for (String s : originalNames) {
-            Names.add(s);
+
+    public RawDataConverter(byte[] Commanddata,boolean commandresponse) {
+        if(commandresponse) {
+            try {
+                ByteArrayInputStream bais = new ByteArrayInputStream(Commanddata);
+                DataInputStream in = new DataInputStream(bais);
+                serverName = in.readUTF();
+                playerName = in.readUTF();
+                command = in.readUTF();
+                argsLength = in.readInt();
+                byte[] bytes = new byte[argsLength];
+                in.readFully(bytes);
+                DataInputStream subIn = new DataInputStream(new ByteArrayInputStream(bytes));
+                while (subIn.available() > 0) {
+                    args.add(in.readUTF());
+                }
+                resLength = in.readInt();
+                byte[] bytes1 = new byte[resLength];
+                DataInputStream subIn1 = new DataInputStream(new ByteArrayInputStream(bytes1));
+                while (subIn1.available() > 0) {
+                    response.add(in.readUTF());
+                }
+            } catch (IOException e) {
+            }
         }
-        serverName = rawData.split(":")[0];
-        server = Main.getPlugin().getProxy().getServerInfo(serverName);
-        if (NameFind) {
-            Main.getPlugin().getLogger().info("Converting Message");
-        }
+                // Use the code sample in the 'Response' sections below to read
+                // the data.
+
     }
 
     public ArrayList<String> getArgs() {
@@ -88,9 +93,5 @@ public class RawDataConverter {
     @Override
     public String toString() {
         return super.toString();
-    }
-
-    public ArrayList<String> getNames() {
-        return Names;
     }
 }
