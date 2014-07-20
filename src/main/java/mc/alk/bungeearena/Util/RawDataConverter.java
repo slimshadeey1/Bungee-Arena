@@ -20,10 +20,27 @@ public class RawDataConverter {
     String serverName;
     String playerName;
     ArrayList<String> response;
-    Integer argsLength;
-    Integer resLength;
+    Short argsLength;
+    Short resLength;
+    String uuid;
 
 
+    public RawDataConverter(byte[] Commanddata) {
+        ByteArrayInputStream bais = new ByteArrayInputStream(Commanddata);
+        DataInputStream in = new DataInputStream(bais);
+        try {
+            argsLength = in.readShort();
+            byte[] bytes = new byte[argsLength];
+            in.readFully(bytes);
+            DataInputStream subIn = new DataInputStream(new ByteArrayInputStream(bytes));
+            while (subIn.available() > 0) {
+                args.add(in.readUTF());
+            }
+        } catch (Exception e) {
+        }
+    }
+    // Use the code sample in the 'Response' sections below to read
+    // the data.
 
     public RawDataConverter(byte[] Commanddata,boolean commandresponse) {
         if(commandresponse) {
@@ -32,19 +49,22 @@ public class RawDataConverter {
                 DataInputStream in = new DataInputStream(bais);
                 serverName = in.readUTF();
                 playerName = in.readUTF();
-                command = in.readUTF();
-                argsLength = in.readInt();
-                byte[] bytes = new byte[argsLength];
-                in.readFully(bytes);
-                DataInputStream subIn = new DataInputStream(new ByteArrayInputStream(bytes));
-                while (subIn.available() > 0) {
-                    args.add(in.readUTF());
-                }
-                resLength = in.readInt();
-                byte[] bytes1 = new byte[resLength];
-                DataInputStream subIn1 = new DataInputStream(new ByteArrayInputStream(bytes1));
-                while (subIn1.available() > 0) {
-                    response.add(in.readUTF());
+                try {
+                    command = in.readUTF();
+                    argsLength = in.readShort();
+                    byte[] bytes = new byte[argsLength];
+                    in.readFully(bytes);
+                    DataInputStream subIn = new DataInputStream(new ByteArrayInputStream(bytes));
+                    while (subIn.available() > 0) {
+                        args.add(in.readUTF());
+                    }
+                    resLength = in.readShort();
+                    byte[] bytes1 = new byte[resLength];
+                    DataInputStream subIn1 = new DataInputStream(new ByteArrayInputStream(bytes1));
+                    while (subIn1.available() > 0) {
+                        response.add(in.readUTF());
+                    }
+                } catch (Exception e) {
                 }
             } catch (IOException e) {
             }
@@ -88,6 +108,11 @@ public class RawDataConverter {
 
     public ProxiedPlayer getPlayer() {
         return player;
+    }
+
+    public String getUuid() {
+        uuid = args.get(1);
+        return uuid;
     }
 
     @Override

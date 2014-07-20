@@ -93,7 +93,7 @@ public class Receiver implements Listener {
                         bytes = new byte[len];
                         in.readFully(data);
                         dataRaw = new String(data);
-                        new CommandHandler(bytes); //Change
+                        new PlayerHandler(bytes);
                         break;
 
 

@@ -26,7 +26,7 @@ public class CommandHandler {
         String msg1 = msg.replaceAll("<player>", player);
         String msg2 = msg1.replaceAll("<server>", server);
         StringBuilder msg3 = new StringBuilder(msg2);
-        if (msg.equalsIgnoreCase("<0>") | msg.equalsIgnoreCase("Error") | msg.isEmpty()) {
+        if (msg.contains("<0>") | msg.equalsIgnoreCase("Error") | msg.isEmpty()) {
             msg3.replace(0, msg3.length(), "Uh oh! An error has occurred, please contact your server administrator!");
             return msg3;
         } else {

@@ -9,6 +9,7 @@ import net.md_5.bungee.api.connection.*;
 import java.util.*;
 
 /**
+ * TODO This class still needs to be changed to fit all the requirements of the arena commands. I just have created this to have something here for now. It will follow this basic structure.
  * Created by Ben Byers on 7/16/2014.
  */
 public class ArenaExecutor {
@@ -19,7 +20,7 @@ public class ArenaExecutor {
         String playername = sender.getName();
         ProxiedPlayer player = Main.getPlugin().getProxy().getPlayer(playername);
         ArrayList<String> arg = new ArrayList<>();
-        for(String s:args){
+        for (String s : args) {
             arg.add(s);
         }
         switch (option.toLowerCase()) {
@@ -27,23 +28,12 @@ public class ArenaExecutor {
                 try {
                     wait(3);
                     player.connect(server);
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
                 new PlayerTransmitter(player, "BungeeCord", "BattleArenaCommand", command + ":" + args);
                 break;
-            case "leave":
-                new Transmitter("BattleArenaCommand", command, playername,arg,server.getName());
-                break;
-            case "info":
-                new Transmitter("BattleArenaCommand", command, playername,arg,server.getName());
-                break;
-            case "option":
-                new Transmitter("BattleArenaCommand", command, playername,arg,server.getName());
-                break;
-            case "status":
-                new Transmitter("BattleArenaCommand", command, playername,arg,server.getName());
-                break;
-            case "check":
-                new Transmitter("BattleArenaCommand", command, playername,arg,server.getName());
+            default:
+                new Transmitter("BattleArenaCommand", command, playername, arg, server.getName());
                 break;
         }
     }

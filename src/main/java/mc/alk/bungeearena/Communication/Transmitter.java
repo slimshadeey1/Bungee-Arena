@@ -15,19 +15,19 @@ import java.util.*;
 public class Transmitter {
 /* Perform Transmitting */
     private Plugin plugin = Main.getPlugin();
-    public Transmitter(String subChannel,ArrayList<String> message,Integer id,String server) {
+
+    public Transmitter(String subChannel, ArrayList<String> message, String id, String server) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream(); //Converted
         DataOutputStream data = new DataOutputStream(bytes); //Message will be
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
 
         //Define Sub Channel
         out.writeUTF(subChannel);
-
+        out.writeUTF(id);
         try {
             for (String s:message) {
                 data.writeUTF(s);
             }
-            data.writeShort(id);
         }catch (IOException e){}
         out.writeShort(bytes.toByteArray().length);
         out.write(bytes.toByteArray());
