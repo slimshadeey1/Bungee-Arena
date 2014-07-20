@@ -15,25 +15,42 @@ import java.util.*;
 public class ArenaExecutor {
     public ArenaExecutor(CommandSender sender, String command, String[] args) {
         String option = args[0];
-        String servername = Receiver.getGameMap().get(command.toLowerCase());
-        ServerInfo server = Main.getPlugin().getProxy().getServerInfo(servername);
+
+        String servername = null;///TODO Find how alkarin stores arena names or how he knows where they are. Take the and do the same thing as event and game. Make a map of each arena - server pair and call the arena name to get the server
+
         String playername = sender.getName();
+
         ProxiedPlayer player = Main.getPlugin().getProxy().getPlayer(playername);
-        ArrayList<String> arg = new ArrayList<>();
+
+        ArrayList<String> data = new ArrayList<>();
+        data.add(playername);
+        data.add(command);
         for (String s : args) {
-            arg.add(s);
+            data.add(s);
         }
         switch (option.toLowerCase()) {
             case "join":
                 try {
                     wait(3);
-                    player.connect(server);
+                    player.connect(Main.getPlugin().getProxy().getServerInfo(servername));
                 } catch (Exception e) {
                 }
-                new PlayerTransmitter(player, "BungeeCord", "BattleArenaCommand", command + ":" + args);
+                new PlayerTransmitter(player, "BattleArenaCommand", data, servername);
                 break;
-            default:
-                new Transmitter("BattleArenaCommand", command, playername, arg, server.getName());
+            case "leave":
+                new Transmitter("BattleArenaCommand", servername, data);
+                break;
+            case "info":
+                new Transmitter("BattleArenaCommand", servername, data);
+                break;
+            case "option":
+                new Transmitter("BattleArenaCommand", servername, data);
+                break;
+            case "status":
+                new Transmitter("BattleArenaCommand", servername, data);
+                break;
+            case "check":
+                new Transmitter("BattleArenaCommand", servername, data);
                 break;
         }
     }

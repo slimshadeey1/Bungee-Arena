@@ -11,10 +11,11 @@ import net.md_5.bungee.api.chat.*;
 public class Executer {
     public Executer(CommandSender sender, String[] args, String command, String... alias) {
         if (Receiver.getGameNames().contains(command.toLowerCase())) {
-            GameExecutor.Execute(sender, command, args);
+            new GameExecutor(sender, command, args);
 
         } else if (Receiver.getEventNames().contains(command.toLowerCase())) {
             new EventExecutor(sender, command, args);
+
         } else if (command.equalsIgnoreCase("arena")) {
             new ArenaExecutor(sender, command, args);
             /* More actions can go here, we will check things like join so we can move them onto another server. */

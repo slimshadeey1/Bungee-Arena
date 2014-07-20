@@ -1,23 +1,29 @@
 package mc.alk.bungeearena.Handlers;
 
+import mc.alk.bungeearena.*;
 import mc.alk.bungeearena.Util.*;
+import net.md_5.bungee.api.config.*;
 import net.md_5.bungee.api.connection.*;
+
+import java.util.*;
 
 /**
  * I should investigate latency at some point.
  * Created by Ben Byers on 7/16/2014.
  */
 public class CommandHandler {
-    public CommandHandler(byte[] data) {
+    public CommandHandler(ArrayList<String> data, ServerInfo server) {
         //Initialize data into converter. Dump raw string in... get good stuff back :)
-        RawDataConverter newData = new RawDataConverter(data,true);
         //Get all of the necessary variables and define them here
-        ProxiedPlayer player = newData.getPlayer();
-        String response = newData.getResponseString();
-        String playerName = newData.getPlayerName();
-        String serverName = newData.getServerName();
-
-        String finalResponse = sb(response, playerName, serverName).toString();
+        ProxiedPlayer player = Main.getPlugin().getProxy().getPlayer(data.get(0));
+        String response = "";
+        for (String s : data) {
+            if (data.indexOf(s) == 0) {
+                return;
+            }
+            response = response + " " + s;
+        }
+        String finalResponse = sb(response, player.getName(), server.getName()).toString();
 
         player.sendMessage(finalResponse);
     }

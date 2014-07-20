@@ -46,12 +46,9 @@ public class Receiver implements Listener {
 
 
                     case "EventNames":
-                        len = in.readShort();
-                        bytes = new byte[len];
-                        in.readFully(bytes);
-                        NamesFormatter EventData = new NamesFormatter(bytes);
-                        EventNames = EventData.getNames();
-                        Server = EventData.getServerName();
+                        BAConverter EventData = new BAConverter(in);
+                        EventNames = EventData.getData();
+                        Server = EventData.getServer();
                         for (String s : EventNames) {
                             EventMap.put(s, Server);
                         }
@@ -59,50 +56,33 @@ public class Receiver implements Listener {
 
 
                     case "GameNames":
-                        len = in.readShort();
-                        bytes = new byte[len];
-                        in.readFully(bytes);
-                        NamesFormatter GameData = new NamesFormatter(bytes);
-                        GameNames = GameData.getNames();
-                        Server = GameData.getServerName();
-                        for (String s : GameData.getNames()) {
+                        BAConverter GameData = new BAConverter(in);
+                        GameNames = GameData.getData();
+                        Server = GameData.getServer();
+                        for (String s : GameNames) {
                             GameMap.put(s, Server);
                         }
                         break;
 
 
                     case "CommandResponse":            /* I would like the rest of the channels to be executed in this fashion. */
-                        len = in.readShort();
-                        bytes = new byte[len];
-                        in.readFully(bytes);
-                        new CommandHandler(bytes);
+                        BAConverter command = new BAConverter(in);
+                        new CommandHandler(command.getData(), command.getServerInfo());
                         break;
 
 
                     case "BattleTeams":
-                        len = in.readShort();
-                        bytes = new byte[len];
-                        in.readFully(data);
-                        dataRaw = new String(data);
-                        new CommandHandler(bytes); //Change
+                        BAConverter teams = new BAConverter(in);
                         break;
 
 
                     case "BattlePlayers":
-                        len = in.readShort();
-                        bytes = new byte[len];
-                        in.readFully(data);
-                        dataRaw = new String(data);
-                        new PlayerHandler(bytes);
+                        BAConverter players = new BAConverter(in);
                         break;
 
 
                     case "BattleStats":
-                        len = in.readShort();
-                        bytes = new byte[len];
-                        in.readFully(data);
-                        dataRaw = new String(data);
-                        new CommandHandler(bytes); //Change
+                        BAConverter stats = new BAConverter(in);
                         break;
 
 
