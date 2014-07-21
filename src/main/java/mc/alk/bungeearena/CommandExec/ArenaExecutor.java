@@ -14,14 +14,20 @@ import java.util.*;
  */
 public class ArenaExecutor {
     public ArenaExecutor(CommandSender sender, String command, String[] args) {
-        String option = args[0];
 
         String servername = null;///TODO Find how alkarin stores arena names or how he knows where they are. Take the and do the same thing as event and game. Make a map of each arena - server pair and call the arena name to get the server
 
         String playername = sender.getName();
 
-        ProxiedPlayer player = Main.getPlugin().getProxy().getPlayer(playername);
 
+        ProxiedPlayer player = Main.getPlugin().getProxy().getPlayer(playername);
+        String option;
+        try {
+            option = args[0];
+        }catch (ArrayIndexOutOfBoundsException e){
+            player.sendMessage("A help message will go here :)");
+            return;
+        }
         ArrayList<String> data = new ArrayList<>();
         data.add(playername);
         data.add(command);

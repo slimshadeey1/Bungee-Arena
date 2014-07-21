@@ -14,14 +14,19 @@ import java.util.*;
  */
 public class GameExecutor {
     public GameExecutor(CommandSender sender, String command, String[] args) {
-        String option = args[0];
 
         String servername = Receiver.getGameMap().get(command.toLowerCase());
 
         String playername = sender.getName();
 
         ProxiedPlayer player = Main.getPlugin().getProxy().getPlayer(playername);
-
+        String option;
+        try {
+            option = args[0];
+        }catch (ArrayIndexOutOfBoundsException e){
+            player.sendMessage("A help message will go here :)");
+            return;
+        }
         ArrayList<String> data = new ArrayList<>();
         data.add(playername);
         data.add(command);
