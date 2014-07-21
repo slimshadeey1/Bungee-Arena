@@ -3,6 +3,7 @@ package mc.alk.bungeearena.Communication;
 import mc.alk.bungeearena.Handlers.*;
 import mc.alk.bungeearena.Util.*;
 import net.md_5.bungee.api.connection.*;
+import net.md_5.bungee.api.event.*;
 import net.md_5.bungee.api.plugin.*;
 import net.md_5.bungee.event.*;
 
@@ -25,8 +26,9 @@ public class Receiver implements Listener {
 
 
     @EventHandler
-    public static void PluginMessageEvent(Connection sender, Connection receiver, String tag, byte[] data) {
-
+    public static void PluginMessageEvent(PluginMessageEvent event) {
+        String tag = event.getTag();
+        byte[] data = event.getData();
 
         if (tag.equals("BattleArena")) {
 
