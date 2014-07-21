@@ -26,7 +26,7 @@ public class Commander extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        Executer executor = new Executer(sender, args, this.getName(), getAliases());
+        new Executer(sender, args, this.getName(), getAliases());
     }
 
     @Override
