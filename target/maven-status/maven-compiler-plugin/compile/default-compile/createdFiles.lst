@@ -1,4 +1,14 @@
+mc\alk\bungeearena\Commands\Commands.class
+mc\alk\bungeearena\Util\BAConverter.class
+mc\alk\bungeearena\CommandExec\GameExecutor.class
+mc\alk\bungeearena\CommandExec\ArenaExecutor.class
+mc\alk\bungeearena\Communication\Receiver.class
+mc\alk\bungeearena\Commands\Commander.class
+mc\alk\bungeearena\Handlers\CommandHandler.class
 mc\alk\bungeearena\Main.class
-mc\alk\bungeearena\Commands.class
-mc\alk\bungeearena\Commander.class
-mc\alk\bungeearena\Executer.class
+mc\alk\bungeearena\Handlers\TeamHandler.class
+mc\alk\bungeearena\CommandExec\EventExecutor.class
+mc\alk\bungeearena\Communication\PlayerTransmitter.class
+mc\alk\bungeearena\CommandExec\Executer.class
+mc\alk\bungeearena\CommandExec\TeamExecutor.class
+mc\alk\bungeearena\Communication\Transmitter.class

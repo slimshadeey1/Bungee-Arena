@@ -1,4 +1,14 @@
-C:\Users\Ben Byers\Workspaces\BattleArena\Bungee Arena\src\main\java\mc\alk\bungeearena\Commander.java
-C:\Users\Ben Byers\Workspaces\BattleArena\Bungee Arena\src\main\java\mc\alk\bungeearena\Commands.java
-C:\Users\Ben Byers\Workspaces\BattleArena\Bungee Arena\src\main\java\mc\alk\bungeearena\Main.java
-C:\Users\Ben Byers\Workspaces\BattleArena\Bungee Arena\src\main\java\mc\alk\bungeearena\Executer.java
+C:\Users\Ben Byers\Workspaces\BattleArena1\Bungee-Arena\src\main\java\mc\alk\bungeearena\Util\BAConverter.java
+C:\Users\Ben Byers\Workspaces\BattleArena1\Bungee-Arena\src\main\java\mc\alk\bungeearena\Communication\Receiver.java
+C:\Users\Ben Byers\Workspaces\BattleArena1\Bungee-Arena\src\main\java\mc\alk\bungeearena\Handlers\CommandHandler.java
+C:\Users\Ben Byers\Workspaces\BattleArena1\Bungee-Arena\src\main\java\mc\alk\bungeearena\Commands\Commander.java
+C:\Users\Ben Byers\Workspaces\BattleArena1\Bungee-Arena\src\main\java\mc\alk\bungeearena\Communication\PlayerTransmitter.java
+C:\Users\Ben Byers\Workspaces\BattleArena1\Bungee-Arena\src\main\java\mc\alk\bungeearena\CommandExec\EventExecutor.java
+C:\Users\Ben Byers\Workspaces\BattleArena1\Bungee-Arena\src\main\java\mc\alk\bungeearena\Communication\Transmitter.java
+C:\Users\Ben Byers\Workspaces\BattleArena1\Bungee-Arena\src\main\java\mc\alk\bungeearena\CommandExec\TeamExecutor.java
+C:\Users\Ben Byers\Workspaces\BattleArena1\Bungee-Arena\src\main\java\mc\alk\bungeearena\Handlers\TeamHandler.java
+C:\Users\Ben Byers\Workspaces\BattleArena1\Bungee-Arena\src\main\java\mc\alk\bungeearena\Main.java
+C:\Users\Ben Byers\Workspaces\BattleArena1\Bungee-Arena\src\main\java\mc\alk\bungeearena\CommandExec\Executer.java
+C:\Users\Ben Byers\Workspaces\BattleArena1\Bungee-Arena\src\main\java\mc\alk\bungeearena\Commands\Commands.java
+C:\Users\Ben Byers\Workspaces\BattleArena1\Bungee-Arena\src\main\java\mc\alk\bungeearena\CommandExec\ArenaExecutor.java
+C:\Users\Ben Byers\Workspaces\BattleArena1\Bungee-Arena\src\main\java\mc\alk\bungeearena\CommandExec\GameExecutor.java
