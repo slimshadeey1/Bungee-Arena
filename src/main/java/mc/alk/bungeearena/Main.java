@@ -18,6 +18,7 @@ public class Main extends Plugin {
     public void onEnable() {
         plugin = this;
         plugin.getProxy().registerChannel("BungeeCord");
+        plugin.getProxy().registerChannel("BattleArena");
         Commands.enable();
         this.getProxy().getPluginManager().registerListener(this, new Receiver());
     }
