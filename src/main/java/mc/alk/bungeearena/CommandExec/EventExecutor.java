@@ -23,8 +23,7 @@ public class EventExecutor {
         try {
             option = args[0];
         }catch (ArrayIndexOutOfBoundsException e){
-            player.sendMessage("A help message will go here :)");
-            return;
+            option = "null";
         }
         ArrayList<String> data = new ArrayList<>();
         data.add(playername);
@@ -55,6 +54,9 @@ public class EventExecutor {
                 break;
             case "check":
                 new Transmitter("BattleArenaCommand", servername, data);
+                break;
+            default:
+                player.sendMessage("A help message will go here :)");
                 break;
         }
     }
