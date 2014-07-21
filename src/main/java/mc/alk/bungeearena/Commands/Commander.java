@@ -1,6 +1,7 @@
 package mc.alk.bungeearena.Commands;
 
 /**
+ * Cleaned up
  * Created by Ben Byers on 7/15/2014.
  */
 
