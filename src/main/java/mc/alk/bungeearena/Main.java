@@ -16,8 +16,8 @@ public class Main extends Plugin {
 
     @Override
     public void onEnable() {
-        plugin.getProxy().registerChannel("BungeeCord");
         plugin = this;
+        plugin.getProxy().registerChannel("BungeeCord");
         Commands.enable();
         this.getProxy().getPluginManager().registerListener(this, new Receiver());
     }
