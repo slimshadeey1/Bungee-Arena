@@ -58,7 +58,7 @@ public class ArenaExecutor {
                 new Transmitter("BattleArenaCommand", servername, data);
                 break;
             default:
-                player.sendMessage("A help message will go here :)");
+                player.sendMessage("A help message will go here :)");//TODO Find out why players receive two messages per command.
                 break;
         }
     }
