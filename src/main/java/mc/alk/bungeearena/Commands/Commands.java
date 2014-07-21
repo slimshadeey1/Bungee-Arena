@@ -14,8 +14,7 @@ public class Commands {
      */
     private static Plugin plugin = Main.getPlugin();
     private static PluginManager server = plugin.getProxy().getPluginManager();
-
-    public static void enable() {
+    public static void register() {
 
         for (String event : Receiver.getEventNames()) {
             server.registerCommand(plugin, new Commander(event, null));
@@ -24,10 +23,18 @@ public class Commands {
             server.registerCommand(plugin, new Commander(game, null));
 
         }
+    }
+
+    public static void enable() {
+
         /* These are all static commands */
         server.registerCommand(plugin, new Commander("team", null));
         server.registerCommand(plugin, new Commander("arena", null));
 
-
+        try {
+            register();
+        } catch (Exception e) {
+        }
     }
-}
+    }
+
