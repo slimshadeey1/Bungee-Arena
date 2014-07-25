@@ -3,6 +3,7 @@ package mc.alk.bungeearena.CommandExec;
 import mc.alk.bungeearena.*;
 import mc.alk.bungeearena.Communication.*;
 import net.md_5.bungee.api.*;
+import net.md_5.bungee.api.chat.*;
 import net.md_5.bungee.api.config.*;
 import net.md_5.bungee.api.connection.*;
 
@@ -58,7 +59,7 @@ public class ArenaExecutor {
                 new Transmitter("BattleArenaCommand", servername, data);
                 break;
             default:
-                player.sendMessage("A help message will go here :)");//TODO Find out why players receive two messages per command.
+                player.sendMessage("Test!");//TODO Find out why players receive two messages per command.
                 break;
         }
     }
