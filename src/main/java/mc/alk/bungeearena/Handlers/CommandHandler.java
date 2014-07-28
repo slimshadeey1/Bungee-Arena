@@ -1,7 +1,6 @@
 package mc.alk.bungeearena.Handlers;
 
 import mc.alk.bungeearena.*;
-import mc.alk.bungeearena.Util.*;
 import net.md_5.bungee.api.config.*;
 import net.md_5.bungee.api.connection.*;
 

@@ -17,19 +17,19 @@ public class Executer {
 
             if (Receiver.getEventNames().contains(command.toLowerCase())) ;
             new EventExecutor(sender, command, args);
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             Main.getPlugin().getLogger().warning("The games and events have not been populated yet!");
         }
-        if (command.equalsIgnoreCase("arena"));
-            new ArenaExecutor(sender, command, args);
+        if (command.equalsIgnoreCase("arena")) ;
+        new ArenaExecutor(sender, command, args);
             /* More actions can go here, we will check things like join so we can move them onto another server. */
-        if (command.equalsIgnoreCase("team"));
-            new TeamExecutor(sender, command, args);
+        if (command.equalsIgnoreCase("team")) ;
+        new TeamExecutor(sender, command, args);
             /* More actions can go here, we will check things like join so we can move them onto another server. */
         /*
         In Here we will perform all actions needed in the command system. All we need now is if
-        statements to compare the command. To create a command all you need to do is Commands
-        command = new Commands(command,permission,alias) permission default is null.
+        statements to compare the command. To create a command all you need to do is Proto
+        command = new Proto(command,permission,alias) permission default is null.
          */
     }
 }

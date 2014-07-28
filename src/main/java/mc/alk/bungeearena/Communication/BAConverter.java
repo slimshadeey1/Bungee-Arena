@@ -1,4 +1,4 @@
-package mc.alk.bungeearena.Util;
+package mc.alk.bungeearena.Communication;
 
 import mc.alk.bungeearena.*;
 import net.md_5.bungee.api.config.*;

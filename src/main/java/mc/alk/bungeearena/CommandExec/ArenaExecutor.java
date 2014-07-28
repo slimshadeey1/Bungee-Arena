@@ -3,8 +3,6 @@ package mc.alk.bungeearena.CommandExec;
 import mc.alk.bungeearena.*;
 import mc.alk.bungeearena.Communication.*;
 import net.md_5.bungee.api.*;
-import net.md_5.bungee.api.chat.*;
-import net.md_5.bungee.api.config.*;
 import net.md_5.bungee.api.connection.*;
 
 import java.util.*;
@@ -25,7 +23,7 @@ public class ArenaExecutor {
         String option;
         try {
             option = args[0];
-        }catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             option = "null";
         }
         ArrayList<String> data = new ArrayList<>();
@@ -59,7 +57,7 @@ public class ArenaExecutor {
                 new Transmitter("BattleArenaCommand", servername, data);
                 break;
             default:
-                player.sendMessage("Test!");//TODO Find out why players receive two messages per command.
+                player.sendMessage("ChannelCommandAPI!");//TODO Find out why players receive two messages per command.
                 break;
         }
     }
